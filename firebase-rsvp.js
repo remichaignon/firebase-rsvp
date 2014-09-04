@@ -1,7 +1,7 @@
 var RSVP = require("rsvp");
 
 module.exports = {
-    this.buildURL = function (keys) {
+    buildURL: function (keys) {
         keys = keys || "";
 
         if (keys instanceof Array) {
@@ -15,7 +15,7 @@ module.exports = {
         return keys;
     },
 
-    this.set = function (ref, keys, value) {
+    set: function (ref, keys, value) {
         return new RSVP.Promise(function (resolve, reject) {
             function onComplete (error) {
                 if (error) {
@@ -30,7 +30,7 @@ module.exports = {
         });
     },
 
-    this.update = function (ref, keys, value) {
+    update: function (ref, keys, value) {
         return new RSVP.Promise(function (resolve, reject) {
             function onComplete (error) {
                 if (error) {
@@ -45,7 +45,7 @@ module.exports = {
         });
     },
 
-    this.get = function (ref, keys) {
+    get: function (ref, keys) {
         return new RSVP.Promise(function (resolve, reject) {
             function onComplete (snapshot) {
                 if (snapshot.val() === null) {
@@ -63,7 +63,7 @@ module.exports = {
         });
     },
 
-    this.remove = function (ref, keys) {
+    remove: function (ref, keys) {
         return new RSVP.Promise(function (resolve, reject) {
             function onComplete (error) {
                 if (error) {
