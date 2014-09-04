@@ -1,6 +1,6 @@
 {
   "name": "firebase-rsvp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Firebase wrapper with RSVP's promises",
   "main": "firebase-rsvp.js",
   "scripts": {
@@ -21,7 +21,6 @@
     "url": "https://github.com/remichaignon/firebase-rsvp/issues"
   },
   "dependencies": {
-    "firebase": "~1.0.21",
     "rsvp": "~3.0.13"
   }
 }

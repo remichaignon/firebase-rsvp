@@ -1,8 +1,21 @@
-var Firebase = require("firebase"),
-    RSVP = require("rsvp");
+var RSVP = require("rsvp");
 
-var FirebaseRSVP = function(databaseURL) {
-    this.set = function (key, value) {
+module.exports = {
+    this.buildURL = function (keys) {
+        keys = keys || "";
+
+        if (keys instanceof Array) {
+            keys = keys.join("/");
+        }
+
+        if (typeof keys !== "string") {
+            throw new Error("Error: Key is invalid: " + keys);
+        }
+
+        return keys;
+    },
+
+    this.set = function (ref, keys, value) {
         return new RSVP.Promise(function (resolve, reject) {
             function onComplete (error) {
                 if (error) {
@@ -13,11 +26,11 @@ var FirebaseRSVP = function(databaseURL) {
                 }
             }
 
-            _firebaseRef.child(key).set(value, onComplete);
+            ref.child(this.buildURL(keys)).set(value, onComplete);
         });
-    };
+    },
 
-    this.update = function (key, value) {
+    this.update = function (ref, keys, value) {
         return new RSVP.Promise(function (resolve, reject) {
             function onComplete (error) {
                 if (error) {
@@ -28,11 +41,11 @@ var FirebaseRSVP = function(databaseURL) {
                 }
             }
 
-            _firebaseRef.child(key).update(value, onComplete);
+            ref.child(this.buildURL(keys)).update(value, onComplete);
         });
-    };
+    },
 
-    this.get = function (key) {
+    this.get = function (ref, keys) {
         return new RSVP.Promise(function (resolve, reject) {
             function onComplete (snapshot) {
                 if (snapshot.val() === null) {
@@ -46,11 +59,11 @@ var FirebaseRSVP = function(databaseURL) {
                 reject("Error: Firebase synchronization failed: " + error);
             };
 
-            _firebaseRef.child(key).once("value", onComplete, onError);
+            ref.child(this.buildURL(keys)).once("value", onComplete, onError);
         });
-    };
+    },
 
-    this.remove = function (key) {
+    this.remove = function (ref, keys) {
         return new RSVP.Promise(function (resolve, reject) {
             function onComplete (error) {
                 if (error) {
@@ -61,15 +74,7 @@ var FirebaseRSVP = function(databaseURL) {
                 }
             }
 
-            _firebaseRef.child(key).remove(onComplete);
+            ref.child(this.buildURL(keys)).remove(onComplete);
         });
-    };
-
-    if (typeof databaseURL !== "string") {
-        throw new Error("Error: Firebase URL invalid.");
     }
-
-    var _firebaseRef = new Firebase(databaseURL);
 };
-
-module.exports = FirebaseRSVP;
