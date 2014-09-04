@@ -34,7 +34,7 @@ module.exports = {
             }
 
             ref.child(this.buildURL(keys)).set(value, onComplete);
-        });
+        }.bind(this));
     },
 
     update: function (ref, keys, value) {
@@ -49,7 +49,7 @@ module.exports = {
             }
 
             ref.child(this.buildURL(keys)).update(value, onComplete);
-        });
+        }.bind(this));
     },
 
     get: function (ref, keys) {
@@ -67,7 +67,7 @@ module.exports = {
             };
 
             ref.child(this.buildURL(keys)).once("value", onComplete, onError);
-        });
+        }.bind(this));
     },
 
     remove: function (ref, keys) {
@@ -82,6 +82,6 @@ module.exports = {
             }
 
             ref.child(this.buildURL(keys)).remove(onComplete);
-        });
+        }.bind(this));
     }
 };
