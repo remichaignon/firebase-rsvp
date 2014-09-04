@@ -1,6 +1,6 @@
 {
   "name": "firebase-rsvp",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Firebase wrapper with RSVP's promises",
   "main": "firebase-rsvp.js",
   "scripts": {

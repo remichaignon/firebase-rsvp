@@ -2,17 +2,24 @@ var RSVP = require("rsvp");
 
 module.exports = {
     buildURL: function (keys) {
-        keys = keys || "";
+        var path = [];
+
+        if (this.namespace) {
+            path.push(this.namespace);
+        }
 
         if (keys instanceof Array) {
-            keys = keys.join("/");
+            path.push(keys);
         }
 
-        if (typeof keys !== "string") {
-            throw new Error("Error: Key is invalid: " + keys);
+        path.push(keys || "");
+        path = path.join("/");
+
+        if (typeof path !== "string") {
+            throw new Error("Error: Path is invalid: " + path);
         }
 
-        return keys;
+        return path;
     },
 
     set: function (ref, keys, value) {
