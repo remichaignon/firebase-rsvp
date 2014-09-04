@@ -6,18 +6,10 @@ Firebase wrapper with RSVP's promises
 
 ## Usage examples
 
-##### Create a FirebaseRSVP instance
-
-```
-var FirebaseRSVP = require("firebase-rsvp");
-
-var ref = new FirebaseRSVP("https://MY_FIREBASE_APP.firebaseio.com/");
-```
-
 ##### Set
 
 ```
-ref.set("a", { b: "c" })
+this.set(firebaseRef, "a", { b: "c" })
     .then(function (value) {
         // value is { b: "c" }
     })
@@ -29,7 +21,7 @@ ref.set("a", { b: "c" })
 ##### Get
 
 ```
-ref.get("a")
+this.get(firebaseRef, "a")
     .then(function (value) {
         // value is { b: "c" }
     })
@@ -41,11 +33,11 @@ ref.get("a")
 ##### Update
 
 ```
-ref.update("a", { d: "e" })
+this.update(firebaseRef, "a", { d: "e" })
     .then(function (value) {
         // value is { d: "e" } - only the updated part of "a"
         //  if you want the full value of "a", use get
-        return ref.get("a");
+        return firebaseRef.get("a");
     })
     .then(function (value) {
         // value is { b: "c", d: "e" }
@@ -58,7 +50,7 @@ ref.update("a", { d: "e" })
 ##### Remove
 
 ```
-ref.remove("a")
+this.remove("a")
     .then(function () {
         // nothing is returned
     })
