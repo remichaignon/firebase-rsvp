@@ -6,6 +6,14 @@ Firebase wrapper with RSVP's promises
 
 ## Usage examples
 
+#### Namespace
+
+You can declare a namespace on your `FirebaseRSVP` and it will be appended to any path for that Firebase ref.
+
+#### Keys
+
+A key can be a single string or an array of strings, either they will be compiled and joined with slashes.
+
 ##### Set
 
 ```
@@ -50,7 +58,7 @@ this.update(firebaseRef, "a", { d: "e" })
 ##### Remove
 
 ```
-this.remove("a")
+this.remove(firebaseRef, "a")
     .then(function () {
         // nothing is returned
     })

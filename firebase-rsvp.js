@@ -9,10 +9,12 @@ module.exports = {
         }
 
         if (keys instanceof Array) {
-            path.push(keys);
+            path = path.concat(keys);
+        }
+        else {
+            path.push(keys || "");
         }
 
-        path.push(keys || "");
         path = path.join("/");
 
         if (typeof path !== "string") {
